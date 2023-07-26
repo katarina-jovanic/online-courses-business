@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Zavrsni.Models.Course>
+@using Microsoft.AspNetCore.Authentication
+@using System.Security.Claims
+@{
+    var isStudent = User.HasClaim("Role", "Student");
+    var isAdmin = User.HasClaim("Role", "Admin");
+    var isTeacher = User.HasClaim("Role", "Teacher");
+}
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>Svi kursevi:</h1>
+    @if (isTeacher)
+    {
+        <p>
+            <a class="tbutton" asp-action="Create">Kreiraj novi kurs</a>
+        </p>
+    }
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv
+            </th>
+            <th>
+                Opis
+            </th>
+            <th>
+                Trajanje (h)
+            </th>
+            <th>
+                Cena (din)
+            </th>
+            <th>
+                Predavač
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher.Introduction)
+            </td>
+                    @if (isAdmin)
+                    {
+                        <td>
+                            <a class="tbutton" asp-action="Edit" asp-route-id="@item.CourseID">Izmeni</a>|<a class="tbutton" asp-action="Details" asp-route-id="@item.CourseID">Detalji</a>|<a class="tbutton" asp-action="Delete" asp-route-id="@item.CourseID">Obriši</a>
+                        </td>
+                    }
+                    @if (isStudent)
+                    {
+                        <td>
+                            |<a class="tbutton" asp-action="Details" asp-route-id="@item.CourseID">Detalji</a>|<a class="tbutton" asp-controller="Students" asp-action="Checkout">Kupi</a>
+                        </td>
+                    }
+        </tr>
+}
+    </tbody>
+</table>
+</div>

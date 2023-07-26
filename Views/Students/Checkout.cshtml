@@ -1,0 +1,54 @@
+﻿@model Zavrsni.Models.Student
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>CHECKOUT:</h1>
+
+<h4>Plaćanje:</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <select asp-for="StudentID" class ="form-control" asp-items="ViewBag.StudentID"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Ime na kartici</label>
+                <input asp-for="CardName" class="form-control" />
+                <span asp-validation-for="CardName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Broj računa</label>
+                <input asp-for="CardNumber" class="form-control" />
+                <span asp-validation-for="CardNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Datum isteka</label>
+                <input asp-for="ExpirationDate" class="form-control" />
+                <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">CSV</label>
+                <input asp-for="CSV" class="form-control" />
+                <span asp-validation-for="CSV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Uloga</label>
+                <input asp-for="Role" class="form-control" value="Student"/>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+
+                <a class="tbutton" asp-controller="Students" asp-action="Success">Kupi</a> | <a class="tbutton" asp-controller="Courses" asp-action="Index">Odustani</a>
+        </form>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

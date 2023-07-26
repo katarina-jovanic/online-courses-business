@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Zavrsni.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>Svi korisnici</h1>
+
+<p>
+        <a class="tbutton" asp-action="Create">Kreiraj novog korisnika</a> |
+        <a class="tbutton" asp-action="Create" asp-controller="Students">Kreiraj novog studenta</a> |
+        <a class="tbutton" asp-action="Create" asp-controller="Teachers">Kreiraj novog predavača</a> 
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ime
+            </th>
+            <th>
+                Prezime
+            </th>
+            <th>
+                Email
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            
+            <td>
+                        <a class="tbutton" asp-action="Edit" asp-route-id="@item.UserID">Izmeni</a>|<a class="tbutton" asp-action="Details" asp-route-id="@item.UserID">Detalji</a>|<a class="tbutton" asp-action="Delete" asp-route-id="@item.UserID">Obriši</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,166 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@using System.Security.Claims
+
+@{
+    var isStudent = User.HasClaim("Role", "Student");
+    var isAdmin = User.HasClaim("Role", "Admin");
+    var isTeacher = User.HasClaim("Role", "Teacher");
+
+    
+    
+}
+
+
+@*<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Zavrsni</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Zavrsni.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Zavrsni</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - Zavrsni - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+*@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ZavrsniRadBizUp</title>
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ZavrsniRadBizUp.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;800&family=Roboto:wght@100&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ZavrsniRadBizUp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>
+        </ul>
+        </div>
+        </div>
+        </nav>*@
+        <div class="container-fluid">
+            <div class="row sticky-top" id="navbarbg">
+                <div class="col-lg"></div>
+                <div class="col-sm"><a asp-controller="Home" asp-action="Index"> <img src="~/Logo.png" alt="BizUp" class="logo"></a> </div>
+                @if (!User.Identity.IsAuthenticated){
+                <div class="col-sm" style="display: inline-flex; margin-right: 3%;">
+                    <a class="navdugme" asp-controller="Users" asp-action="Login">LOGIN</a>
+                    <a class="navdugme" asp-controller="Users" asp-action="Register">REGISTER</a>
+                    </div>
+                }
+                @if(User.Identity.IsAuthenticated){
+                    var email = User.FindFirstValue(ClaimTypes.Email).ToString();
+                
+                @if (isAdmin){
+                    <div class="col-sm" style="display: inline-flex; margin-right: 1%;">
+                        <a class="navdugme" asp-controller="Users" asp-action="Index">KORISNICI</a>
+                        <a class="navdugme" asp-controller="Teachers" asp-action="Index">PREDAVAČI</a>
+                        <a class="navdugme" asp-controller="Students" asp-action="Index">STUDENTI</a>
+                        <a class="navdugme" asp-controller="Users" asp-action="Profile" asp-route-email ="@email">PROFIL</a>
+                        <form asp-controller="Users" asp-action="Logout">
+                                <input asp-controller="Users" asp-action="Logout" type="submit" value="ODJAVI SE" class="navdugme" style="margin-right: 20% !important; margin-top: 15% !important" />
+                        </form>
+                    </div>
+                }
+                @if (isStudent){
+                     <div class="col-lg" style="display: inline-flex; margin-right: 1%;">
+                        <a class="navdugme" asp-controller="Teachers" asp-action="Index">PREDAVAČI</a>
+                        <a class="navdugme" asp-controller="Courses" asp-action="Index">KURSEVI</a>
+                        <a class="navdugme" asp-controller="Users" asp-action="Profile" asp-route-email="@email">PROFIL</a>
+                        <form asp-controller="Users" asp-action="Logout">
+                                <input asp-controller="Users" asp-action="Logout" type="submit" value="ODJAVI SE" class="navdugme" style="margin-right: 20% !important; margin-top: 15% !important" />
+                        </form>
+                    </div>
+                }
+                @if (isTeacher){
+                    <div class="col-lg" style="display: inline-flex; margin-right: 2%;">
+                        <a class="navdugme" asp-controller="Courses" asp-action="TeacherCourses" asp-route-email="@email">MOJI KURSEVI</a>
+                        <a class="navdugme" asp-controller="Courses" asp-action="Create">NOVI KURS</a>
+                        <a class="navdugme" asp-controller="Users" asp-action="Profile" asp-route-email ="@email">PROFIL</a> 
+                        <form asp-controller="Users" asp-action="Logout" style="padding=6px !important;">
+                                <input asp-controller="Users" asp-action="Logout" type="submit" value="ODJAVI SE" class="navdugme" style="margin-right: 20% !important; margin-top: 15% !important" />
+                         </form>
+                    </div>
+                }}
+            </div>
+        </div>
+    </header>
+    @*<div class="container">*@
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    @*</div>*@
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - ZavrsniRad - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

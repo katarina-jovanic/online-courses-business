@@ -1,0 +1,47 @@
+﻿@model Zavrsni.Models.Teacher
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>Obriši predavača</h1>
+
+<h3>Da li želiš da obrišeš predavača?</h3>
+<div>
+    <h4>Predavač</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Opis predavača
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Introduction)
+        </dd>
+        <dt class = "col-sm-2">
+            Uloga
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+        <dt class = "col-sm-2">
+            Broj kreiranih kurseva
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumCoursesCreated)
+        </dd>
+        <dt class = "col-sm-2">
+            Email
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TeacherNavigation.Email)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="TeacherID" />
+            <input type="submit" value="Obriši" class="tbutton" /> |
+            <a class="tbutton" asp-action="Index">Nazad na listu</a>
+    </form>
+</div>
+</div>

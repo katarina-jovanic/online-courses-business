@@ -1,0 +1,43 @@
+﻿@model Zavrsni.Models.Teacher
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>Kreiraj novog predavača</h1>
+
+<h4>Predavači</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <select asp-for="TeacherID" class ="form-control" asp-items="ViewBag.TeacherID"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Opis</label>
+                <input asp-for="Introduction" class="form-control" />
+                <span asp-validation-for="Introduction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Uloga</label>
+                <input asp-for="Role" class="form-control" value="Teacher" />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                    <input type="submit" value="Sačuvaj" class="tbutton" />
+            </div>
+            <div class="form-group">
+                    <input type="submit" value="Preskoči" class="tbutton" />
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Zavrsni.Models.Admin>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>Index</h1>
+
+<p>
+        <a class="tbutton" asp-action="Create">Kreiraj novog admina</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminNavigation.Email)
+            </td>
+            <td>
+                <a class="tbutton" asp-action="Edit" asp-route-id="@item.AdminID">Izmeni</a>|<a class="tbutton" asp-action="Details" asp-route-id="@item.AdminID">Detalji</a>|<a class="tbutton" asp-action="Delete" asp-route-id="@item.AdminID">Obriši</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

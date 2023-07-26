@@ -1,0 +1,45 @@
+﻿@model Zavrsni.Models.User
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>Brisanje</h1>
+
+<h3>Da li želiš da obrišeš korisnika?</h3>
+<div>
+        <h4>Korisnik @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname)</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Ime:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            Pezime:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+        <dt class = "col-sm-2">
+            Email:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        
+        <dd class = "col-sm-10">
+            @Html.HiddenFor(model => model.Password)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="UserID" />
+        <input type="submit" value="Obriši" class="subbutton" /> |
+            <a class="tbutton" asp-action="Index">Nazad na listu</a>
+    </form>
+</div>
+</div>

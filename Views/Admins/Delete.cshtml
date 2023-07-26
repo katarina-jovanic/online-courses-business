@@ -1,0 +1,36 @@
+﻿@model Zavrsni.Models.Admin
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>Obriši</h1>
+
+<h3>Da li si siguran da želiš da obrišeš korisnika?</h3>
+
+<div>
+    <h4>Admin</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AdminNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AdminNavigation.Email)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+            <input type="hidden" asp-for="AdminID" />
+            <input class="subbutton" type="submit" value="Obriši" /> |
+            <a class="tbutton" asp-action="Index">Nazad na listu</a>
+    </form>
+</div>
+</div>

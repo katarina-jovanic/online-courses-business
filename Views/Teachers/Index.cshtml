@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Zavrsni.Models.Teacher>
+@using Microsoft.AspNetCore.Authentication
+@using System.Security.Claims
+@{
+    var isStudent = User.HasClaim("Role", "Student");
+    var isAdmin = User.HasClaim("Role", "Admin");
+    var isTeacher = User.HasClaim("Role", "Teacher");
+    }    
+
+@{
+
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>Predavači</h1>
+       
+    @if (isAdmin)
+    {
+        <p>
+            <a class="tbutton" asp-action="Create">Kreiraj novog predavača</a>
+        </p>
+        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Opis predavača
+                    </th>
+                    <th>
+                        Uloga
+                    </th>
+                    <th>
+                        Broj kreiranih kurseva
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Introduction)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumCoursesCreated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TeacherNavigation.Email)
+                        </td>
+                    @if (isAdmin)
+                    {
+                        <td>
+                            <a class="tbutton" asp-action="Edit" asp-route-id="@item.TeacherID">Izmeni</a>|<a class="tbutton" asp-action="Details" asp-route-id="@item.TeacherID">Detalji</a>|<a class="tbutton" asp-action="Delete" asp-route-id="@item.TeacherID">Obriši</a>
+                        </td>
+                    }
+                    @if (isStudent)
+                    {
+                        <td>
+                            |<a class="tbutton" asp-action="Details" asp-route-id="@item.TeacherID">Detalji</a>|
+                        </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+ </div>
+    

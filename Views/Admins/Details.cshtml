@@ -1,0 +1,32 @@
+﻿@model Zavrsni.Models.Admin
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>Detalji</h1>
+
+<div>
+    <h4>Admin</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AdminNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AdminNavigation.Email)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="tbutton" asp-action="Edit" asp-route-id="@Model?.AdminID">Izmeni</a> |
+        <a class="tbutton" asp-action="Index">Nazad na listu</a>
+</div>
+</div>

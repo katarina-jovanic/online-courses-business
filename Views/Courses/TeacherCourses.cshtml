@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Zavrsni.Models.Course>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>Svi kursevi:</h1>
+
+<p>
+        <a class="tbutton" asp-action="Create">Kreiraj novi kurs</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv
+            </th>
+            <th>
+                Opis
+            </th>
+            <th>
+                Trajanje (h)
+            </th>
+            <th>
+                Cena (din)
+            </th>
+            <th>
+                Predavač
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher.Introduction)
+            </td>
+            <td>
+                        |<a class="tbutton" asp-action="Details" asp-route-id="@item.CourseID">Detalji</a>|
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

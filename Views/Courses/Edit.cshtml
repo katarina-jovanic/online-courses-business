@@ -1,0 +1,56 @@
+﻿@model Zavrsni.Models.Course
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<h1>Izmeni kurs @Html.DisplayFor(model => model.Name)</h1>
+
+<h4>Kurs</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CourseID" />
+            <div class="form-group">
+                <label class="control-label">Naziv</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Predavač</label>
+                <select asp-for="TeacherID" class="form-control" asp-items="ViewBag.TeacherID"></select>
+                <span asp-validation-for="TeacherID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Opis</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Trajanje</label>
+                <input asp-for="Duration" class="form-control" />
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Cena</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="subbutton" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="tbutton" asp-action="Index">Nazad na listu</a>
+</div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

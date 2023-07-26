@@ -1,0 +1,54 @@
+﻿@model Zavrsni.Models.User
+@using Microsoft.AspNetCore.Authentication
+@using System.Security.Claims
+@{
+    var isStudent = User.HasClaim("Role", "Student");
+    var isAdmin = User.HasClaim("Role", "Admin");
+    var isTeacher = User.HasClaim("Role", "Teacher");
+
+    var email = User.FindFirstValue(ClaimTypes.Email).ToString();
+}
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    
+    @if (isStudent || isTeacher || isAdmin)
+    {
+        
+       
+        @if(Model.Email == email)
+        { <h1>Profil korisnika</h1>
+        <div>
+                <h4>@Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname):</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Ime
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    Prezime
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Surname)
+                </dd>
+                <dt class="col-sm-2">
+                    Email
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                
+            </dl>
+        </div>
+        }
+        
+    }
+
+
+</div>

@@ -1,0 +1,41 @@
+﻿@model Zavrsni.Models.User
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+   
+        <h1>Detalji korisnika @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname) </h1>
+
+        <div>
+            <h4>Korisnik:</h4>
+            <hr />
+            <dl class="row">
+                <dt class = "col-sm-2">
+                    Ime
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class = "col-sm-2">
+                    Prezime
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Surname)
+                </dd>
+                <dt class = "col-sm-2">
+                    Email
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+            </dl>
+        </div>
+        <div>
+            <a class="tbutton" asp-action="Edit" asp-route-id="@Model?.UserID">Izmeni</a> |
+            <a class="tbutton" asp-action="Index">Nazad na listu</a>
+        </div>
+ 
+</div>
